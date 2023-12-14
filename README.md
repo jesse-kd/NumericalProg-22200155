@@ -13,25 +13,25 @@
 
 **List**
 
-* factorial()
-* power()
-* sinTaylor()
-* sindTaylor()
-* bisection()
-* newtonRaphson()
-* secantfzero()
-* printVec()
-* gradient1D()
-* gradientFunc()
-* acceleration()
-* gradientFunck()
-* IntegrateRect()
-* trapz()
-* simpson13()
-* integral()
-* odeRK2()
-* odeRK3()
-* sysRK2()
+* [factorial()](# factorial)
+* [power()](# power)
+* [sinTaylor()](# sinTaylor)
+* [sindTaylor()](# sindTaylor)
+* [bisection()](# bisection)
+* [newtonRaphson()](# newtonRaphson)
+* [secantfzero()](# secantfzero)
+* [printVec()](# printVec)
+* [gradient1D()](# gradient1D)
+* [gradientFunc()](# gradientFunc)
+* [acceleration()](# acceleration)
+* [gradientFunck()](# gradientFunck)
+* [IntegrateRect()](# IntegrateRect)
+* [trapz()](# trapz)
+* [simpson13()](# simpson13)
+* [integral()](# integral)
+* [odeRK2()](# odeRK2)
+* [odeRK3()](# odeRK3)
+* [sysRK2()](# sysRK2)
 
 <hr>
 
@@ -351,14 +351,28 @@ double secantfzero(double func(const double x), double _x0, double _x1, double _
 
 int main()
 {
-
+	float tol = 0.00001;
+    double x0 = 0;
+	double x1 = 3;
+    double sol_sz;
+    
+    printf("Secant Method Result:\n");
+    sol_sz = secantfzero(func, x0, x1, tol); // func: F = 8 - 4.5 * (x - sin(x))
+	printf("Final Solution: %f \t", sol_sz);
+	printf("\n");
 }
 ```
 
 **Output**
 
 ```c
-
+Secant Method Result:
+k:1     Xn(k): 1.865532         Tol: 3.91105890
+k:2     Xn(k): 2.371111         Tol: 0.46416354
+k:3     Xn(k): 2.439193         Tol: 0.06913824
+k:4     Xn(k): 2.430367         Tol: 0.00078291
+k:5     Xn(k): 2.430466         Tol: 0.00000034
+Final Solution: 2.430466
 ```
 
 <hr>
