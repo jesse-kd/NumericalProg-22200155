@@ -4,6 +4,7 @@
 * NP myNP.h
 * NP matrix.h
 
+<hr>
 
 ## NP myNP.h
 
@@ -13,25 +14,25 @@
 
 **List**
 
-* [factorial()](# factorial())
-* [power()](# power())
-* [sinTaylor()](# sinTaylor())
-* [sindTaylor()](# sindTaylor())
-* [bisection()](# bisection())
-* [newtonRaphson()](# newtonRaphson())
-* [secantfzero()](# secantfzero())
-* [printVec()](# printVec())
-* [gradient1D()](# gradient1D())
-* [gradientFunc()](# gradientFunc())
-* [acceleration()](# acceleration())
-* [gradientFunck()](# gradientFunck())
-* [IntegrateRect()](# IntegrateRect())
-* [trapz()](# trapz())
-* [simpson13()](# simpson13())
-* [integral()](# integral())
-* [odeRK2()](# odeRK2())
-* [odeRK3()](# odeRK3())
-* [sysRK2()](# sysRK2())
+* factorial()
+* power()
+* sinTaylor()
+* sindTaylor()
+* bisection()
+* newtonRaphson()
+* secantfzero()
+* printVec()
+* gradient1D()
+* gradientFunc()
+* acceleration()
+* gradientFunck()
+* IntegrateRect()
+* trapz()
+* simpson13()
+* integral()
+* odeRK2()
+* odeRK3()
+* sysRK2()
 
 <hr>
 
@@ -982,4 +983,47 @@ Vector[100] = -0.000119
 
 ```c
 #include "myMatrix.h"
+```
+
+<hr>
+
+### createMat()
+
+> Create Matrix with specified size
+
+```c
+Matrix createMat(int _rows, int _cols);
+```
+**Parameter**
+
+* _rows: number of  the row
+* _cols: number of the column
+
+**Example**
+
+```C
+#include "myMatrix.h"
+
+int main()
+{
+    int rows = 3;
+	int cols = 3;
+    Matrix Out = createMat(rows, cols);
+    
+    for (int i = 0; i < Out.rows; i++)
+		for (int j = 0; j < Out.cols; j++)
+			Out.at[i][j] = 0;
+    
+    printMat(Out, "Out");
+}
+```
+
+**Output**
+
+```c
+=======================================
+    factorial(5) Calculation
+=======================================
+   -  My result = 120
+=======================================
 ```
