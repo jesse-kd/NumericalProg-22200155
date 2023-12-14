@@ -984,6 +984,38 @@ Vector[100] = -0.000119
 ```c
 #include "myMatrix.h"
 ```
+**List**
+
+* createMat()
+* freeMat()
+* txt2Mat()
+* printMat()
+* addMat()
+* zeros()
+* ones()
+* initMat()
+* multMat()
+* eye()
+* transpose()
+* copyMat()
+* copyVal()
+* gaussElim()
+* gaussElim()
+* LUdecompo()
+* solveLU()
+* fwdsub()
+* backsub()
+* invMat()
+* magV()
+* scamultMat()
+* diag()
+* eig()
+* eigvec()
+* linearFit()
+* polyFit()
+* expFit()
+* arr2Mat()
+
 
 <hr>
 
@@ -1021,9 +1053,1156 @@ int main()
 **Output**
 
 ```c
-=======================================
-    factorial(5) Calculation
-=======================================
-   -  My result = 120
-=======================================
+Out =
+       0.000000        0.000000        0.000000
+       0.000000        0.000000        0.000000
+       0.000000        0.000000        0.000000
+```
+
+<hr>
+
+### freeMat()
+
+> Free a memory allocated matrix
+
+```c
+void freeMat(Matrix _A);
+```
+**Parameter**
+
+* _A: defined matrix
+
+**Example**
+
+```C
+#include "myMatrix.h"
+
+int main()
+{
+    int rows = 3;
+	int cols = 3;
+    Matrix Out = createMat(rows, cols);
+    
+    for (int i = 0; i < Out.rows; i++)
+		for (int j = 0; j < Out.cols; j++)
+			Out.at[i][j] = 0;
+    
+    printMat(Out, "Out");
+    freeMat(Out);
+}
+```
+
+**Output**
+
+```c
+Out =
+       0.000000        0.000000        0.000000
+       0.000000        0.000000        0.000000
+       0.000000        0.000000        0.000000
+```
+
+<hr>
+
+### txt2Mat()
+
+> Create a matrix from a text file
+
+```c
+Matrix txt2Mat(std::string _filePath, std::string _fileName);
+```
+**Parameter**
+
+* _filePath: the file path in local disk
+* _fileName: the name of a file
+
+**Example**
+
+```C
+#include "myMatrix.h"
+
+int main()
+{
+    Matrix Out = txt2Mat(path, "prob1_matA"); // prob1_matA is zero matix
+    
+    printMat(Out, "Out");
+}
+```
+
+**Output**
+
+```c
+Out =
+       0.000000        0.000000        0.000000
+       0.000000        0.000000        0.000000
+       0.000000        0.000000        0.000000
+```
+
+<hr>
+
+### printMat()
+
+> Print matrix
+
+```c
+void printMat(Matrix _A, const char* _name);
+```
+**Parameter**
+
+* _A: name of the matrix to be displayed 
+* _name: name to display on screen
+
+**Example**
+
+```C
+#include "myMatrix.h"
+
+int main()
+{
+    Matrix Out = txt2Mat(path, "prob1_matA"); // prob1_matA is 3*3 zero matix
+    
+    printMat(Out, "Out");
+}
+```
+
+**Output**
+
+```c
+Out =
+       0.000000        0.000000        0.000000
+       0.000000        0.000000        0.000000
+       0.000000        0.000000        0.000000
+```
+
+<hr>
+
+### addMat()
+
+> Matrix addition
+
+```c
+Matrix addMat(Matrix _A, Matrix _B);
+```
+**Parameter**
+
+* _A: 1st matrix
+* _B: 2nd matrix
+
+**Example**
+
+```C
+#include "myMatrix.h"
+
+int main()
+{
+    Matrix A = txt2Mat(path, "prob1_matA"); // prob1_matA is 3*3 zero matix
+    Matrix B = txt2Mat(path, "prob1_matB"); // prob1_matB is 3*3 eye matix
+    Matrix Out = addMat(A, B);
+    printMat(Out, "Out");
+}
+```
+
+**Output**
+
+```c
+Out =
+       1.000000        0.000000        0.000000
+       0.000000        1.000000        0.000000
+       0.000000        0.000000        1.000000
+```
+
+<hr>
+
+### zeros()
+
+> Create matrix of all zeros
+
+```c
+Matrix zeros(int _rows, int _cols);
+```
+**Parameter**
+
+* _rows: number of rows
+* _cols: number of columns
+
+**Example**
+
+```C
+#include "myMatrix.h"
+
+int main()
+{
+    Matrix Out = zeros(3, 3);
+    
+    printMat(Out, "Out");
+}
+```
+
+**Output**
+
+```c
+Out =
+       0.000000        0.000000        0.000000
+       0.000000        0.000000        0.000000
+       0.000000        0.000000        0.000000
+```
+
+<hr>
+
+### ones()
+
+> Create matrix of all ones
+
+```c
+Matrix ones(int _rows, int _cols);
+```
+**Parameter**
+
+* _rows: number of rows
+* _cols: number of columns
+
+**Example**
+
+```C
+#include "myMatrix.h"
+
+int main()
+{
+    Matrix Out = ones(3, 3);
+    
+    printMat(Out, "Out");
+}
+```
+
+**Output**
+
+```c
+Out =
+       1.000000        1.000000        1.000000
+       1.000000        1.000000        1.000000
+       1.000000        1.000000        1.000000
+```
+
+<hr>
+
+### initMat()
+
+> Initialization of Matrix elements
+
+```c
+void initMat(Matrix _A, double _val);
+```
+**Parameter**
+
+* _A: defined matrix
+* _val: value that wants to change
+
+**Example**
+
+```C
+#include "myMatrix.h"
+
+int main()
+{
+    int rows = 3;
+	int cols = 3;
+    int val = 3;
+    Matrix Out = createMat(rows, cols);
+    initMat(Out, 3);
+    printMat(Out, "Out");
+}
+```
+
+**Output**
+
+```c
+Out =
+       3.000000        3.000000        3.000000
+       3.000000        3.000000        3.000000
+       3.000000        3.000000        3.000000
+```
+
+<hr>
+
+### multMat()
+
+> Multiply  matrix A and matrix B
+
+```c
+Matrix	multMat(Matrix _A, Matrix _B);
+```
+**Parameter**
+
+* _A: 1st matrix
+* _B: 2nd matrix
+
+**Example**
+
+```C
+#include "myMatrix.h"
+
+int main()
+{
+    Matrix A = txt2Mat(path, "prob1_matA"); // prob1_matA is 3*3 eye matix
+    Matrix B = txt2Mat(path, "prob1_matB"); // prob1_matB is 3*3 eye matix
+    Matrix Out = multMat(A, B);
+    printMat(Out, "Out");
+}
+```
+
+**Output**
+
+```c
+Out =
+       1.000000        0.000000        0.000000
+       0.000000        1.000000        0.000000
+       0.000000        0.000000        1.000000
+```
+
+<hr>
+
+### eye()
+
+> Create identity  matrix
+
+```c
+Matrix	eye(int _rows, int _cols);
+```
+**Parameter**
+
+* _rows: number of rows
+* _cols: number of columns
+
+**Example**
+
+```C
+#include "myMatrix.h"
+
+int main()
+{
+    int rows = 3;
+	int cols = 3;
+    Matrix Out = eye(rows, cols);
+    printMat(Out, "Out");
+}
+```
+
+**Output**
+
+```c
+Out =
+       1.000000        0.000000        0.000000
+       0.000000        1.000000        0.000000
+       0.000000        0.000000        1.000000
+```
+
+<hr>
+
+### transpose()
+
+> Create Transpose matrix
+
+```c
+Matrix	transpose(Matrix _A);
+```
+**Parameter**
+
+* _A: defined matrix
+
+**Example**
+
+```C
+#include "myMatrix.h"
+
+int main()
+{
+    int rows = 3;
+	int cols = 3;
+    Matrix A = eye(rows, cols);
+    Matrix Out = transpose(A);
+    printMat(Out, "Out");
+}
+```
+
+**Output**
+
+```c
+Out =
+       1.000000        0.000000        0.000000
+       0.000000        1.000000        0.000000
+       0.000000        0.000000        1.000000
+```
+
+<hr>
+
+### copyMat()
+
+> Copy matrix
+
+```c
+Matrix copyMat(Matrix _A);
+```
+**Parameter**
+
+* _A: defined matrix
+
+**Example**
+
+```C
+#include "myMatrix.h"
+
+int main()
+{
+    int rows = 3;
+	int cols = 3;
+    Matrix A = eye(rows, cols);
+    Matrix Out = copyMat(A);
+    printMat(Out, "Out");
+}
+```
+
+**Output**
+
+```c
+Out =
+       1.000000        0.000000        0.000000
+       0.000000        1.000000        0.000000
+       0.000000        0.000000        1.000000
+```
+
+<hr>
+
+### copyVal()
+
+> Copy matrix Elements from A to B
+
+```c
+void copyVal(Matrix _A, Matrix _B);
+```
+**Parameter**
+
+* _A: defined matrix
+* _B: matrix that wants to change the elements same as _A
+
+**Example**
+
+```C
+#include "myMatrix.h"
+
+int main()
+{
+    int rows = 3;
+	int cols = 3;
+    Matrix A = eye(rows, cols);
+    Matrix Out = createMat(rows, cols);
+    copyVal(A, Out);
+    printMat(Out, "Out");
+}
+```
+
+**Output**
+
+```c
+Out =
+       1.000000        0.000000        0.000000
+       0.000000        1.000000        0.000000
+       0.000000        0.000000        1.000000
+```
+
+<hr>
+
+### gaussElim()
+
+> Gauss Elimination method without partial pivoting
+
+```c
+void gaussElim(Matrix A, Matrix b, Matrix U, Matrix d);
+```
+**Parameter**
+
+* A: the input matrix A
+* b: the input matrix b
+* U: the output matrix A that passed elimination process
+* d: the output matrix b that passed elimination process
+
+**Example**
+
+```C
+#include "myMatrix.h"
+
+int main()
+{
+	double arrA[] = { 0.5, -0.5, 0, 0, 0.87, 0.87,0, 0, 0,0,1,0,0,0,0,1 };	
+	double arrB[] = { 0,-10,-5.75 * cos(PI / 3), 5.75 * sin(PI / 3) };
+	Matrix matA = arr2Mat(arrA, 4, 4);
+	Matrix vecb = arr2Mat(arrB, 4, 1);
+	Matrix U = zeros(4, 4);
+	Matrix d = zeros(4, 1);
+    
+    gaussElim(matA, vecb, U, d);
+    printMat(U, "U");
+    printMat(d, "d");
+}
+```
+
+**Output**
+
+```c
+U =
+       0.500000       -0.500000        0.000000        0.000000
+       0.000000        1.740000        0.000000        0.000000
+       0.000000        0.000000        1.000000        0.000000
+       0.000000        0.000000        0.000000        1.000000
+d =
+       0.000000
+     -10.000000
+      -2.875000
+       4.979646
+```
+
+<hr>
+
+### gaussElim()
+
+> Gauss elimination method with partial pivoting
+
+```c
+void gaussElim(Matrix A, Matrix b, Matrix U, Matrix d, Matrix P);
+```
+**Parameter**
+
+* A: the input matrix A
+* b: the input matrix b
+* U: the output matrix A that passed elimination process
+* d: the output matrix b that passed elimination process
+* P: permutation matrix
+
+**Example**
+
+```C
+#include "myMatrix.h"
+
+int main()
+{
+	double arrA[] = { 0.5, -0.5, 0, 0, 0.87, 0.87,0, 0, 0,0,1,0,0,0,0,1 };	
+	double arrB[] = { 0,-10,-5.75 * cos(PI / 3), 5.75 * sin(PI / 3) };
+	Matrix matA = arr2Mat(arrA, 4, 4);
+	Matrix vecb = arr2Mat(arrB, 4, 1);
+    Matrix P = eye(4, 4);
+	Matrix U = zeros(4, 4);
+	Matrix d = zeros(4, 1);
+    
+    gaussElim(matA, vecb, U, d, P);
+    printMat(U, "U");
+    printMat(d, "d");
+    printMat(P, "P");
+}
+```
+
+**Output**
+
+```c
+U =
+       0.870000        0.870000        0.000000        0.000000
+       0.000000       -1.000000        0.000000        0.000000
+       0.000000        0.000000        1.000000        0.000000
+       0.000000        0.000000        0.000000        1.000000
+d =
+       0.000000
+     -10.000000
+      -2.875000
+       4.979646
+P =
+       0.000000        1.000000        0.000000        0.000000
+       1.000000        0.000000        0.000000        0.000000
+       0.000000        0.000000        1.000000        0.000000
+       0.000000        0.000000        0.000000        1.000000
+```
+
+<hr>
+
+### LUdecompo()
+
+> LU docomposition
+
+```c
+void LUdecompo(Matrix A, Matrix L, Matrix U, Matrix P);
+```
+**Parameter**
+
+* A: the input matrix A
+* L: the output matrix forms A = LU
+* U: the output matrix forms A = LU
+* P: permutation matrix
+
+**Example**
+
+```C
+#include "myMatrix.h"
+
+int main()
+{
+	double arrA[] = { 0.5, -0.5, 0, 0, 0.87, 0.87,0, 0, 0,0,1,0,0,0,0,1 };
+	Matrix matA = arr2Mat(arrA, 4, 4);
+    Matrix P = eye(4, 4);
+    Matrix L = zeros(4, 4);
+	Matrix U = zeros(4, 4);
+    
+    LUdecompo(matA, L, U, P);
+    printMat(L, "L");
+    printMat(U, "U");
+    printMat(P, "P");
+}
+```
+
+**Output**
+
+```c
+L =
+       1.000000        0.000000        0.000000        0.000000
+       0.574713        1.000000        0.000000        0.000000
+       0.000000       -0.000000        1.000000        0.000000
+       0.000000       -0.000000        0.000000        1.000000
+
+U =
+       0.870000        0.870000        0.000000        0.000000
+       0.000000       -1.000000        0.000000        0.000000
+       0.000000        0.000000        1.000000        0.000000
+       0.000000        0.000000        0.000000        1.000000
+
+P =
+       0.000000        1.000000        0.000000        0.000000
+       1.000000        0.000000        0.000000        0.000000
+       0.000000        0.000000        1.000000        0.000000
+       0.000000        0.000000        0.000000        1.000000
+```
+
+<hr>
+
+### solveLU()
+
+> Solving LU decomposition
+
+```c
+void solveLU(Matrix L, Matrix U, Matrix P, Matrix b, Matrix x);
+```
+**Parameter**
+
+* L: the input matrix through LUdecompo()
+* U: the input matrix through LUdecompo()
+* P: permutation matrix through LUdecompo()
+* b: the input matrix Ax = b
+* x: the output matrix
+
+**Example**
+
+```C
+#include "myMatrix.h"
+
+int main()
+{
+	double arrA[] = { 0.5, -0.5, 0, 0, 0.87, 0.87,0, 0, 0,0,1,0,0,0,0,1 };
+    double arrB[] = { 0,-10,-5.75 * cos(PI / 3), 5.75 * sin(PI / 3) };
+	Matrix matA = arr2Mat(arrA, 4, 4);
+    Matrix vecb = arr2Mat(arrB, 4, 1);
+    Matrix vecx = zeros(4, 1);
+    Matrix P = eye(4, 4);
+    Matrix L = zeros(4, 4);
+	Matrix U = zeros(4, 4);
+    
+    LUdecompo(matA, L, U, P);
+    solveLU(L, U, P, vecb, vecx);
+    printMat(vecx, "vecx");
+
+}
+```
+
+**Output**
+
+```c
+vecx =
+      -5.747126
+      -5.747126
+      -2.875000
+       4.979646
+```
+
+<hr>
+
+### fwdsub()
+
+> Forward substitution
+
+```c
+void fwdsub(Matrix L, Matrix b, Matrix y);
+```
+**Parameter**
+
+* L: the lower triangular matrix
+* b: the input matrix Ly = b
+* y: the output matrix
+
+**Example**
+
+```C
+#include "myMatrix.h"
+
+int main()
+{
+	double arrA[] = { 0.5, -0.5, 0, 0, 0.87, 0.87,0, 0, 0,0,1,0,0,0,0,1 };
+    double arrB[] = { 0,-10,-5.75 * cos(PI / 3), 5.75 * sin(PI / 3) };
+	Matrix matA = arr2Mat(arrA, 4, 4);
+    Matrix vecb = arr2Mat(arrB, 4, 1);
+    Matrix vecy = zeros(4, 1);
+    Matrix P = eye(4, 4);
+    Matrix L = zeros(4, 4);
+	Matrix U = zeros(4, 4);
+    
+    LUdecompo(matA, L, U, P);
+    Matrix _b = multMat(P, vecb);
+    fwdsub(L, _b, vecy);
+    printMat(vecy, "vecy");
+
+}
+```
+
+**Output**
+
+```c
+vecy =
+     -10.000000
+       5.747126
+      -2.875000
+       4.979646
+```
+
+<hr>
+
+### backsub()
+
+> Back substitution
+
+```c
+void backsub(Matrix U, Matrix d, Matrix x);
+```
+**Parameter**
+
+* U: the upper triangular matrix
+* d: the input matrix Ux = d
+* x: the output matrix
+
+**Example**
+
+```C
+#include "myMatrix.h"
+
+int main()
+{
+	double arrA[] = { 0.5, -0.5, 0, 0, 0.87, 0.87,0, 0, 0,0,1,0,0,0,0,1 };
+    double arrB[] = { 0,-10,-5.75 * cos(PI / 3), 5.75 * sin(PI / 3) };
+	Matrix matA = arr2Mat(arrA, 4, 4);
+    Matrix vecb = arr2Mat(arrB, 4, 1);
+    Matrix vecx = zeros(4, 1);
+    Matrix vecy = zeros(4, 1);
+    Matrix P = eye(4, 4);
+    Matrix L = zeros(4, 4);
+	Matrix U = zeros(4, 4);
+    
+    LUdecompo(matA, L, U, P);
+    Matrix _b = multMat(P, vecb);
+    fwdsub(L, _b, vecy);
+    backsub(U, vecy, vecx);
+    printMat(vecx, "vecx");
+
+}
+```
+
+**Output**
+
+```c
+vecx =
+      -5.747126
+      -5.747126
+      -2.875000
+       4.979646
+```
+
+<hr>
+
+### invMat()
+
+> Inverse Matrix
+
+```c
+double invMat(Matrix A, Matrix Ainv);
+```
+**Parameter**
+
+* A: the defined matrix
+* Ainv: the output matrix (initially Ainv should be eye matrix)
+
+**Example**
+
+```C
+#include "myMatrix.h"
+
+int main()
+{
+	Matrix matA = txt2Mat(path, "prob1_matK"); // (75, -20, 0; -20, 35, -15; 0, -15, 15)
+    int rows = matA.rows;
+	int cols = matA.cols;
+    Matrix matF = eye(rows, cols);
+    
+    invMat(matA, matF);
+    printMat(matF, "matF");
+}
+```
+
+**Output**
+
+```c
+matF =
+       0.018182        0.018182        0.018182
+       0.018182        0.068182        0.068182
+       0.018182        0.068182        0.134848
+```
+
+<hr>
+
+### magV()
+
+> Magunitude of Vector
+
+```c
+double magV(Matrix V);
+```
+**Parameter**
+
+* V: the input matrix
+
+**Example**
+
+```C
+#include "myMatrix.h"
+
+int main()
+{
+	double arrA[] = { 0.5, -0.5, 0, 0, 0.87, 0.87,0, 0, 0,0,1,0,0,0,0,1 };
+	Matrix matA = arr2Mat(arrA, 4, 4);
+	double val = magV(matA);
+	printf("val = %f\n", val);
+}
+```
+
+**Output**
+
+```c
+val = 1.003444
+```
+
+<hr>
+
+### scamultMat()
+
+> Multiply  matrix A and scalar val
+
+```c
+Matrix scamultMat(Matrix _A, double _val);
+```
+**Parameter**
+
+* V: the input matrix
+
+**Example**
+
+```C
+#include "myMatrix.h"
+
+int main()
+{
+	double arrA[] = { 0.5, -0.5, 0, 0, 0.87, 0.87,0, 0, 0,0,1,0,0,0,0,1 };
+	Matrix matA = arr2Mat(arrA, 4, 4);
+	Matrix Out = scamultMat(matA, 10);
+    
+    printMat(Out,"Out");
+}
+```
+
+**Output**
+
+```c
+Out =
+       5.000000       -5.000000        0.000000        0.000000
+       8.700000        8.700000        0.000000        0.000000
+       0.000000        0.000000       10.000000        0.000000
+       0.000000        0.000000        0.000000       10.000000
+```
+
+<hr>
+
+### diag()
+
+> vector, diagonal term of matrix A
+
+```c
+Matrix diag(Matrix _A);
+```
+**Parameter**
+
+* _A: the input matrix
+
+**Example**
+
+```C
+#include "myMatrix.h"
+
+int main()
+{
+	double arrA[] = { 0.5, -0.5, 0, 0, 0.87, 0.87,0, 0, 0,0,1,0,0,0,0,1 };
+	Matrix matA = arr2Mat(arrA, 4, 4);
+	Matrix Out = diag(matA);
+    
+    printMat(Out,"Out");
+}
+```
+
+**Output**
+
+```c
+Out =
+       0.500000
+       0.870000
+       1.000000
+       1.000000
+```
+
+<hr>
+
+### eig()
+
+> finding Eigenvalues
+
+```c
+Matrix eig(Matrix A);
+```
+**Parameter**
+
+* A: the input matrix
+
+**Example**
+
+```C
+#include "myMatrix.h"
+
+int main()
+{
+	Matrix matA = txt2Mat(path, "prob1_matA"); (30, 15, 20; 15, 22, 26; 20, 26, 40)
+    Matrix eigVals = eig(matA);
+    printMat(eigVals, "eigVals");
+}
+```
+
+**Output**
+
+```c
+eigVals =
+      73.015425
+      15.522467
+       3.462108
+```
+
+<hr>
+
+### eigvec()
+
+> finding Eigenvetors
+
+```c
+Matrix eigvec(Matrix A);
+```
+**Parameter**
+
+* A: the input matrix
+
+**Example**
+
+```C
+#include "myMatrix.h"
+
+int main()
+{
+	Matrix matA = txt2Mat(path, "prob1_matA"); (30, 15, 20; 15, 22, 26; 20, 26, 40)
+    Matrix eigVecs = eigvec(matA);
+    printMat(eigVecs, "eigVecs");
+}
+```
+
+**Output**
+
+```c
+
+```
+
+<hr>
+
+### linearFit()
+
+> Linear least square regression
+
+```c
+Matrix	linearFit(Matrix _X, Matrix _Y);
+```
+**Parameter**
+
+* _X: the input matrix x data
+* _Y: the input matrix y data
+
+**Example**
+
+```C
+#include "myMatrix.h"
+
+int main()
+{
+	int M = 6;
+	double T_array[] = { 30, 40, 50, 60, 70, 80 };
+    double P_array[] = { 1.05, 1.07, 1.09, 1.14, 1.17, 1.21 };
+    Matrix T = arr2Mat(T_array, M, 1);
+	Matrix P = arr2Mat(P_array, M, 1);
+    Matrix z = linearFit(T, P);
+    
+	printMat(z, "z");
+}
+```
+
+**Output**
+
+```c
+z =
+       0.940952
+       0.003286
+```
+
+<hr>
+
+### polyFit()
+
+> Curve fit with a high-order polynomial
+
+```c
+Matrix	polyFit(Matrix _X, Matrix _Y, int n);
+```
+**Parameter**
+
+* _X: the input matrix x data
+* _Y: the input matrix y data
+* n: the number of the order
+
+**Example**
+
+```C
+#include "myMatrix.h"
+
+int main()
+{
+	int M = 16;
+	double strain[] = { 0, 0.4, 0.8, 1.2, 1.6, 2.0, 2.4, 2.8, 3.2, 3.6, 4.0, 4.4, 4.8, 5.2, 5.6, 6.0 };
+	double stress[] = { 0, 3, 4.5, 5.8, 5.9, 5.8, 6.2, 7.4, 9.6, 15.6, 20.7, 26.7, 31.1, 35.6, 39.3, 41.5 };
+	Matrix Stra = arr2Mat(strain, M, 1);
+	Matrix Stre = arr2Mat(stress, M, 1);
+	Matrix z = polyFit(Stra, Stre, 4);
+    
+	printMat(z, "z");
+}
+```
+
+**Output**
+
+```c
+z =
+      -0.274607
+      12.877980
+     -10.192668
+       3.118549
+      -0.264389
+```
+
+<hr>
+
+### expFit()
+
+> Curve fit with an exponential function
+
+```c
+Matrix	expFit(Matrix _X, Matrix _Y);
+```
+**Parameter**
+
+* _X: the input matrix x data
+* _Y: the input matrix y data
+
+**Example**
+
+```C
+#include "myMatrix.h"
+
+int main()
+{
+	int M = 15;
+	double time[] = { 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30 };
+	double Voltage[] = { 9.7, 8.1, 6.6, 5.1, 4.4, 3.7, 2.8, 2.4, 2.0, 1.6, 1.4, 1.1, 0.85, 0.69, 0.6 };
+	Matrix t = arr2Mat(time, M, 1);
+	Matrix V= arr2Mat(Voltage, M, 1);
+	Matrix z = expFit(t, V);
+    
+	printMat(z, "z");
+}
+```
+
+**Output**
+
+```c
+z =
+      11.913118
+      -0.100161
+```
+
+<hr>
+
+### arr2Mat()
+
+> Create a matrix from 1D-array
+
+```c
+Matrix	arr2Mat(double* _1Darray, int _rows, int _cols);
+```
+**Parameter**
+
+* _1Darray: the input array
+* _rows: number of rows 
+* _cols: number of column
+
+**Example**
+
+```C
+#include "myMatrix.h"
+
+int main()
+{
+	int M = 6;
+    double T_array[] = { 30, 40, 50, 60, 70, 80 };
+    Matrix T = arr2Mat(T_array, M, 1);
+	printMat(T, "T");
+}
+```
+
+**Output**
+
+```c
+T =
+      30.000000
+      40.000000
+      50.000000
+      60.000000
+      70.000000
+      80.000000
 ```
